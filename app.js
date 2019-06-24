@@ -12,12 +12,24 @@
 // in node not added automatically => to add vars or methods to globals - global.message = 'some message';
 
 
+
+
+
+
+
+
 /*
  * Modules (every file in node app)
  * every var and fn in node app incapsulated in theihr file, where they are located 
  **/
 
-//console.log(module)  
+console.log(module)  
+
+
+
+
+
+
 
 
 /*
@@ -39,12 +51,22 @@ module.exports = log;
 
 
 
+
+
+
+
+
 /*
  * Loading the Module
  * return an object of exported prop (fns and vars) or if exported one prop => then just var or fn
 **/
 
-const logger = require('./2');
+const someObj = require('./2');
+
+
+
+
+
 
 
 
@@ -56,6 +78,12 @@ const path = require('path');
 
 const pathObject = path.parse(__filename);
 console.log(pathObject);
+
+
+
+
+
+
 
 
 /*
@@ -70,6 +98,12 @@ console.log(freeMemory);
 
 
 
+
+
+
+
+
+
 /*
  * File System Module (build in module)
  * always use all async in real apps
@@ -81,3 +115,53 @@ fs.readdir('./', (err, res) => console.log(res.length));
 
 
 
+
+
+
+
+
+
+/*
+ * Event Module (build in module)
+ * EventEmiter - class (so capitalize)
+**/
+
+// Register a listener (register before emit event)
+const Logger = require('./logger');
+const logger = new Logger();
+
+logger.on('messageLogger', (arg) => console.log('Listener called', arg));
+
+
+logger.log('message');
+
+
+
+
+
+
+
+
+
+/*
+ * HTTP Module (build in module)
+ * a lot functionality is based on event emitting 
+**/
+
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  if (req.url === '/') {
+    res.write('Hello world!');
+    res.end();
+  }
+
+  if (req.url === '/api/courses') {
+    res.write(JSON.stringify([1, 2, 3]));
+    res.end();
+  }
+});
+
+// server.on('connection', (socket) => console.log('New connection'));
+
+server.listen(3000, () => console.log('listening on port 3000...'));
