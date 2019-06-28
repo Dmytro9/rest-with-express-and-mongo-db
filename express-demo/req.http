@@ -1,0 +1,38 @@
+###
+GET http://localhost:3000/ HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:3000/api/courses HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:3000/api/courses/3 HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:3000/api/posts/2019/06 HTTP/1.1
+content-type: application/json
+
+
+###
+POST http://localhost:3000/api/courses HTTP/1.1
+content-type: application/json
+
+{
+    "name": "course"
+}
+
+
+###
+PUT http://localhost:3000/api/courses/3 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "put"
+}
+
+
