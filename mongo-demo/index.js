@@ -10,7 +10,10 @@ mongoose.connect('mongodb://localhost:27017/mydb', {
 
 
 const courseSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     author: String,
     tags: [String],
     date: {
@@ -27,17 +30,26 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function createCourse() {
     const course = new Course({
-        name: 'React.js Course',
+        // name: 'React.js Course',
         author: 'Dima',
         tags: ['react', 'frontend'],
-        isPublished: true
+        isPublished: false
     });
 
-    const result = await course.save();
-    console.log(result);
+    try {
+        const result = await course.save();
+        console.log(result);
+
+        // course.validate(err => {
+        //     if (err) {}
+        // })
+    } catch (error) {
+        console.log(error.message)
+    }
+
 };
 
-// createCourse()
+createCourse()
 
 
 
