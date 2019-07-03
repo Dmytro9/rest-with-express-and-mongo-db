@@ -20,7 +20,10 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['web', 'mibile', 'network'] // validating on predefined categories
+        enum: ['web', 'mibile', 'network'], // validating on predefined categories
+        lowercase: true, // set to lowercase 
+        // uppercase: true,
+        trim: true
     },
     author: String,
     // tags: [String],
@@ -39,7 +42,7 @@ const courseSchema = new mongoose.Schema({
         //     isAsync: true,
         //     validator: function(v, callback) {
         //         setTimeout(() => {
-        //             const result = v && v.length > 0 // actualy async operation (file system operation or read from db)
+        //             const result = v && v.length > 0 // actually async operation (file system operation or read from db)
         //             callback(result)
         //         }, 4000)
         //         return v && v.length > 0
@@ -58,7 +61,9 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         required: function() { return this.isPublished }, // required only if ( isPublished: true ) 
         min: 10,
-        max: 200
+        max: 200,
+        get: v => Math.round(v),
+        set: v => Math.round(v),
     },
 });
 
@@ -102,7 +107,7 @@ async function createCourse() {
 
 };
 
-createCourse()
+// createCourse()
 
 
 
