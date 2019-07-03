@@ -12,16 +12,58 @@ mongoose.connect('mongodb://localhost:27017/mydb', {
 const courseSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        minlength: 5,
+        maxlength: 255,
+        // match: /pattern/
+    },
+    category: {
+        type: String,
+        required: true,
+        enum: ['web', 'mibile', 'network'] // validating on predefined categories
     },
     author: String,
-    tags: [String],
+    // tags: [String],
+    tags: {
+        type: Array,
+        validate: {
+            validator: function(v) {
+                return v && v.length > 0
+            },
+            message: 'A course should have at least one tag'
+        } // custom validation !!!
+
+
+        // Async validation
+        // validate: {
+        //     isAsync: true,
+        //     validator: function(v, callback) {
+        //         setTimeout(() => {
+        //             const result = v && v.length > 0 // actualy async operation (file system operation or read from db)
+        //             callback(result)
+        //         }, 4000)
+        //         return v && v.length > 0
+        //     },
+        //     message: 'A course should have at least one tag'
+        // } // custom validation !!!
+
+
+    },
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now 
     },
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: {
+        type: Number,
+        required: function() { return this.isPublished }, // required only if ( isPublished: true ) 
+        min: 10,
+        max: 200
+    },
 });
+
+// (validation specific to strings: minlength, maxlength, match, enum)
+// (validation specific to nymbers: min, max)
 
 
 const Course = mongoose.model('Course', courseSchema);
@@ -30,10 +72,12 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function createCourse() {
     const course = new Course({
-        // name: 'React.js Course',
-        author: 'Dima',
-        tags: ['react', 'frontend'],
-        isPublished: false
+        name: 'Some.js Course',
+        category: '-',
+        author: 'Misha',
+        tags: null,
+        isPublished: false,
+        price: Math.floor(Math.random() * 100)
     });
 
     try {
@@ -43,8 +87,17 @@ async function createCourse() {
         // course.validate(err => {
         //     if (err) {}
         // })
-    } catch (error) {
-        console.log(error.message)
+    } catch (ex) {
+        // console.log(ex.errors)
+        // let errObject = {}
+        for (field in ex.errors) {
+            // errObject = {
+            //     [ex.errors[field].path]: ex.errors[field].message,
+            //     ...errObject 
+            // }
+            console.log(ex.errors[field].message)
+        }
+        // console.log(errObject)
     }
 
 };
