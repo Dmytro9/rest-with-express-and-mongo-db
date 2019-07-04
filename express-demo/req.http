@@ -45,3 +45,35 @@ content-type: application/json
 ###
 DELETE http://localhost:3000/api/courses/3 HTTP/1.1
 content-type: application/json
+
+
+
+
+// *** Genres ***
+
+###
+POST http://localhost:3000/api/genres HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Genre"
+}
+
+
+###
+PUT http://localhost:3000/api/genres/5d1e4ddc6472fc06218b6954 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Genre Updated"
+}
+
+
+###
+DELETE http://localhost:3000/api/genres/5d1e4ddc6472fc06218b6954 HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:3000/api/genres/5d1e51eadaf3870c76fe394a HTTP/1.1
+content-type: application/json
