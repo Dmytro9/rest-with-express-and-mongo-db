@@ -30,7 +30,7 @@ const courseSchema = new mongoose.Schema({
     tags: {
         type: Array,
         validate: {
-            validator: function(v) {
+            validator: function (v) {
                 return v && v.length > 0
             },
             message: 'A course should have at least one tag'
@@ -54,12 +54,14 @@ const courseSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now 
+        default: Date.now // set default value
     },
     isPublished: Boolean,
     price: {
         type: Number,
-        required: function() { return this.isPublished }, // required only if ( isPublished: true ) 
+        required: function () {
+            return this.isPublished
+        }, // required only if ( isPublished: true ) 
         min: 10,
         max: 200,
         get: v => Math.round(v),

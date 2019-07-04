@@ -77,3 +77,43 @@ content-type: application/json
 ###
 GET http://localhost:3000/api/genres/5d1e51eadaf3870c76fe394a HTTP/1.1
 content-type: application/json
+
+
+
+// *** Customers ***
+
+###
+GET http://localhost:3000/api/customers HTTP/1.1
+content-type: application/json
+
+
+###
+POST http://localhost:3000/api/customers HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Customer1",
+    "phone": "12345",
+    "isGold": false
+}
+
+
+###
+PUT http://localhost:3000/api/customers/5d1e568eea1934111bf27ab5 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Customer2",
+    "phone": "45678",
+    "isGold": true
+}
+
+
+###
+DELETE http://localhost:3000/api/customers/5d1e568eea1934111bf27ab5 HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:3000/api/customers/5d1e57a9fa1a3411af5da7ee HTTP/1.1
+content-type: application/json
