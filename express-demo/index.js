@@ -6,10 +6,22 @@ const express = require("express");
 const log = require('./middleware/logger');
 const app = express();
 const courses = require('./routes/courses');
+const genres = require('./routes/genres');
 const home = require('./routes/home');
+const mongoose = require('mongoose');
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`);
+
+
+// DB
+mongoose.connect('mongodb://localhost:27017/mydb', {
+        useNewUrlParser: true
+    })
+    .then(() => console.log('Connected to MongoDB...'))
+    .catch(err => console.log('Could not connect to MongoDB... ', err));
+
+
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -26,6 +38,7 @@ app.use(express.static('public'));
 app.use(helmet());
 app.use('/', home);
 app.use('/api/courses', courses);
+app.use('/api/genres', genres);
 
 
 // console.log('Application Name: ' + config.get('name'));

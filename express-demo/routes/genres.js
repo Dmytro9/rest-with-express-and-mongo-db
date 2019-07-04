@@ -1,23 +1,22 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const Joi = require("joi");
 const router = express.Router();
 
-const courses = [{
-        id: 1,
-        name: "course1"
-    },
-    {
-        id: 2,
-        name: "course2"
-    },
-    {
-        id: 3,
-        name: "course3"
-    }
-];
 
-router.get("/", (req, res) => {
-    res.send(courses);
+const Genre = mongoose.model('Genre', new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 50,
+    }
+}));
+
+
+router.get("/", async (req, res) => {
+    const genres = await Genre.find().sort('name')
+    res.send(genres);
 });
 
 router.get("/:id", (req, res) => {
@@ -30,7 +29,6 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-    console.log(req.body)
     const {
         error
     } = validateCourse(req.body);
@@ -59,6 +57,16 @@ router.put("/:id", (req, res) => {
     res.send(course);
 });
 
+function validateCourse(course) {
+    const schema = {
+        name: Joi.string()
+            .min(3)
+            .required()
+    };
+
+    return Joi.validate(course, schema);
+}
+
 router.delete("/:id", (req, res) => {
     const id = parseInt(req.params.id);
     const course = courses.find(item => item.id === id);
@@ -70,18 +78,6 @@ router.delete("/:id", (req, res) => {
     courses.splice(index, 1);
     res.send(course);
 });
-
-
-// validating fn
-function validateCourse(course) {
-    const schema = {
-        name: Joi.string()
-            .min(3)
-            .required()
-    };
-
-    return Joi.validate(course, schema);
-}
 
 
 module.exports = router;
