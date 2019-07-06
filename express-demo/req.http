@@ -99,12 +99,12 @@ content-type: application/json
 
 
 ###
-PUT http://localhost:3000/api/customers/5d1e568eea1934111bf27ab5 HTTP/1.1
+PUT http://localhost:3000/api/customers/5d1f54a7446c0030467008a3 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Customer2",
-    "phone": "45678",
+    "name": "Customer3",
+    "phone": "44444",
     "isGold": true
 }
 
