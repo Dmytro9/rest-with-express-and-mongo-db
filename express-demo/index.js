@@ -8,6 +8,7 @@ const app = express();
 const courses = require('./routes/courses');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
+const rentals = require('./routes/rentals');
 const movies = require('./routes/movies');
 const home = require('./routes/home');
 const mongoose = require('mongoose');
@@ -17,7 +18,7 @@ const mongoose = require('mongoose');
 
 
 // DB
-mongoose.connect('mongodb://localhost:27017/mydb', {
+mongoose.connect('mongodb://localhost:27017/playground', {
         useNewUrlParser: true
     })
     .then(() => console.log('Connected to MongoDB...'))
@@ -43,6 +44,7 @@ app.use('/api/courses', courses);
 app.use('/api/genres', genres);
 app.use('/api/customers', customers);
 app.use('/api/movies', movies);
+app.use('/api/rentals', rentals);
 
 
 // console.log('Application Name: ' + config.get('name'));

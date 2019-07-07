@@ -3,14 +3,16 @@ const {
     Movie,
     validate
 } = require('../models/movie')
-const Genre = require('../models/genre')
+const {
+    Genre
+} = require('../models/genre')
 const router = express.Router();
 
 
 // Get All
 router.get("/", async (req, res) => {
-    const genres = await Movie.find().sort("title");
-    res.send(genres);
+    const movies = await Movie.find().sort("title");
+    res.send(movies);
 });
 
 // POST
@@ -24,7 +26,7 @@ router.post("/", async (req, res) => {
     if (!genre) return res.status(400).send('Invalid genre');
 
     let movie = new Movie({
-        title: req.body.name,
+        title: req.body.title,
         numberInStock: req.body.numberInStock,
         dailyRentalRate: req.body.dailyRentalRate,
         genre: {

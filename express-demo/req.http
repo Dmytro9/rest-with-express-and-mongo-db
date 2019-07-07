@@ -133,11 +133,27 @@ POST http://localhost:3000/api/movies HTTP/1.1
 content-type: application/json
 
 {
-    "title": "New mivie",
+    "title": "New movie",
     "numberInStock": 3,
     "dailyRentalRate": 9,
-    "genre": {
-        "name": "Horror"
-    }
+    "genreId": "5d222299f55e261b570a8160"
+}
+
+
+// *** Rental ***
+
+###
+GET http://localhost:3000/api/rentals HTTP/1.1
+content-type: application/json
+
+
+###
+POST http://localhost:3000/api/rentals HTTP/1.1
+content-type: application/json
+
+{
+    "customerId": "5d22219b003c0819e8967713",
+    "movieId": "5d2227f5c55a2d2486b70c2e",
+    "rentalFree": 10
     
 }

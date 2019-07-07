@@ -40,7 +40,7 @@ function validateMovie(genre) {
         title: Joi.string().min(5).max(50).required(),
         genreId: Joi.string().required(),
         numberInStock: Joi.number().min(0).required(),
-        dailyRentalRate: Joi().number().min(0).require()
+        dailyRentalRate: Joi.number().min(0).required()
     };
 
     return Joi.validate(genre, schema);

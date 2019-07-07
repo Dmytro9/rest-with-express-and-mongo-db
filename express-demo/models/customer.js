@@ -2,8 +2,8 @@ const mongoose = require("mongoose")
 const Joi = require("joi")
 
 // Schema
-const Customers = mongoose.model(
-    "Customers",
+const Customer = mongoose.model(
+    "Customer",
     new mongoose.Schema({
         name: {
             type: String,
@@ -41,5 +41,5 @@ function validateCustomer(customer) {
 
 
 
-exports.Customers = Customers
+exports.Customer = Customer
 exports.validate = validateCustomer
