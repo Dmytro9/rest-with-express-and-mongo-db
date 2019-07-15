@@ -41,3 +41,6 @@ let course = {
 }
 
 // (ex.: we need to have some info in an object by making one query for read only)
+
+
+// TRANSACTIONS - in mongodb - Two Phase Commit - fawn lib

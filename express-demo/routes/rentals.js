@@ -9,7 +9,12 @@ const {
 const {
     Movie,
 } = require('../models/movie')
+const mongoose = require('mongoose')
+const Fawn = require('fawn')
 const router = express.Router();
+
+
+Fawn.init(mongoose)
 
 
 // Get All
@@ -48,10 +53,31 @@ router.post("/", async (req, res) => {
         rentalFree: req.body.rentalFree
     })
 
-    rental = await rental.save();
-    movie.numberInStock--;
-    movie.save();
-    res.send(rental);
+    // Without Fawn 
+    // rental = await rental.save();
+    // movie.numberInStock--;
+    // movie.save();
+
+
+    // With Fawn
+    try {
+        new Fawn.Task()
+            .save('rentals', rental)
+            .update('movies', {
+                _id: movie._id
+            }, {
+                $inc: {
+                    numberInStock: -1
+                }
+            })
+            // .remove() ...
+            .run()
+
+        res.send(rental);
+    } catch (ex) {
+        res.status(500).send('Something failed.')
+    }
+
 });
 
 
