@@ -157,3 +157,18 @@ content-type: application/json
     "rentalFree": 10
     
 }
+
+
+
+
+// *** User ***
+
+###
+POST http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Dimask",
+    "email": "dpol@gmail.com",
+    "password": "something"
+}

@@ -1,3 +1,5 @@
+const Joi = require("joi")
+Joi.objectId = require('joi-objectid')(Joi)
 const debug = require('debug')('app:startup');
 const config = require('config');
 const helmet = require('helmet');
@@ -10,6 +12,7 @@ const genres = require('./routes/genres');
 const customers = require('./routes/customers');
 const rentals = require('./routes/rentals');
 const movies = require('./routes/movies');
+const users = require('./routes/users');
 const home = require('./routes/home');
 const mongoose = require('mongoose');
 
@@ -45,6 +48,7 @@ app.use('/api/genres', genres);
 app.use('/api/customers', customers);
 app.use('/api/movies', movies);
 app.use('/api/rentals', rentals);
+app.use('/api/users', users);
 
 
 // console.log('Application Name: ' + config.get('name'));

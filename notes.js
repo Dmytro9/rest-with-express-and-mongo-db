@@ -44,3 +44,11 @@ let course = {
 
 
 // TRANSACTIONS - in mongodb - Two Phase Commit - fawn lib
+
+
+// const mongoose = require('mongoose')
+/*
+ *  const id = new mongoose.Types.ObjectId()
+ *  console.log(id.getTimestamp())
+    id is created by mongo driver but not by mongo db, so to get it (send to client) we do not need reasign object when creating (post) it
+**/
