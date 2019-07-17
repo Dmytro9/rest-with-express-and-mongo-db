@@ -52,3 +52,6 @@ let course = {
  *  console.log(id.getTimestamp())
     id is created by mongo driver but not by mongo db, so to get it (send to client) we do not need reasign object when creating (post) it
 **/
+
+
+// custom-enviroment-variables.json - is set into docker file (env vars)

@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const express = require("express");
 const log = require('./middleware/logger');
-const app = express();
 const courses = require('./routes/courses');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
@@ -16,6 +15,14 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 const home = require('./routes/home');
 const mongoose = require('mongoose');
+
+const app = express();
+
+if (!config.get('jwtPrivateKey')) {
+    console.log('FATAL ERROR: jwtPrivateKey is not defined')
+    process.exit(1) // - error (hear set)
+    // process.exit(0) // - success
+}
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`);
