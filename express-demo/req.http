@@ -54,6 +54,7 @@ content-type: application/json
 ###
 POST http://localhost:3000/api/genres HTTP/1.1
 content-type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJlMzBjNzAxYjg3ZTM4NzA2NTQ1NDYiLCJpYXQiOjE1NjMzODkzMzN9.ads27P4p5PVoSfJ256Fg76WmdOP8Vq_brDsh5bXR8Mw
 
 {
     "name": "Genre"
@@ -70,9 +71,9 @@ content-type: application/json
 
 
 ###
-DELETE http://localhost:3000/api/genres/5d1e4ddc6472fc06218b6954 HTTP/1.1
+DELETE http://localhost:3000/api/genres/5d222299f55e261b570a8160 HTTP/1.1
 content-type: application/json
-
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJmODM3OGFlNGQ5MTE5ZTYyNmExY2YiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1NjMzOTQ5MzZ9.ZrPmnJfZUh5mloh-X0olXDj9I4ceCsQXzk_diAABDUU
 
 ###
 GET http://localhost:3000/api/genres/5d1e51eadaf3870c76fe394a HTTP/1.1
@@ -164,13 +165,20 @@ content-type: application/json
 // *** User ***
 
 ###
+GET http://localhost:3000/api/users/me HTTP/1.1
+content-type: application/json
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJlMzBjNzAxYjg3ZTM4NzA2NTQ1NDYiLCJpYXQiOjE1NjMzODkzMzN9.ads27P4p5PVoSfJ256Fg76WmdOP8Vq_brDsh5bXR8Mw
+
+
+###
 POST http://localhost:3000/api/users HTTP/1.1
 content-type: application/json
 
 {
     "name": "Dimasya",
-    "email": "pol@mail.sl",
-    "password": "something"
+    "email": "pol@mail.it",
+    "password": "something",
+    "isAdmin": true
 }
 
 

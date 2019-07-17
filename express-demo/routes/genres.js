@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
 const express = require("express");
-const Joi = require("joi");
 const {
   Genre,
   validate
 } = require('../models/genre')
+const auth = require('../middleware/auth')
+const admin = require('../middleware/admin')
 const router = express.Router();
 
 
@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const {
     error
   } = validate(req.body);
@@ -59,7 +59,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [auth, admin], async (req, res) => {
   const genre = await Genre.findByIdAndRemove(req.params.id);
 
   if (!genre)
