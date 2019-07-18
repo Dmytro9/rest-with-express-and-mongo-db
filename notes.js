@@ -55,3 +55,5 @@ let course = {
 
 
 // custom-enviroment-variables.json - is set into docker file (env vars)
+
+// To handle async errors in routes use require('express-async-errors') or middleware as async.js

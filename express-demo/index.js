@@ -1,4 +1,5 @@
 const Joi = require("joi")
+require('express-async-errors')
 Joi.objectId = require('joi-objectid')(Joi)
 const debug = require('debug')('app:startup');
 const config = require('config');
@@ -6,6 +7,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const express = require("express");
 const log = require('./middleware/logger');
+const error = require('./middleware/error');
 const courses = require('./routes/courses');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
@@ -59,10 +61,13 @@ app.use('/api/rentals', rentals);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
 
+// Handling errors
+app.use(error)
 
 // console.log('Application Name: ' + config.get('name'));
 // console.log('Mail Server: ' + config.get('mail.host'));
 // console.log('Mail Password: ' + config.get('mail.password'));
+
 
 if (app.get('env') === 'development') {
     app.use(morgan('dev'));
