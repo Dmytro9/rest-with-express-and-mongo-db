@@ -1,5 +1,7 @@
 const Joi = require("joi")
 require('express-async-errors')
+const winston = require('winston');
+require('winston-mongodb');
 Joi.objectId = require('joi-objectid')(Joi)
 const debug = require('debug')('app:startup');
 const config = require('config');
@@ -19,6 +21,33 @@ const home = require('./routes/home');
 const mongoose = require('mongoose');
 
 const app = express();
+
+
+process.on('uncaughtException', ex => {
+    console.log('WE GOT AN UNCOUGHT EXCEPTIOPN');
+    winston.error(ex.message, ex);
+})
+
+// winston.add(winston.transports.File, {
+//     filename: 'logfile.log'
+// });
+
+winston.configure({
+    transports: [new winston.transports.File({
+        filename: 'logfile.log'
+    })]
+});
+
+// winston.configure({
+//     transports: [new winston.transports.MongoDB({
+//         db: 'mongodb://localhost:27017/playground',
+//         level: 'error',
+//         // level: 'info' ...
+//     })]
+// });
+
+throw new Error('Something failed during startup.')
+
 
 if (!config.get('jwtPrivateKey')) {
     console.log('FATAL ERROR: jwtPrivateKey is not defined')

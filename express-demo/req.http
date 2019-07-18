@@ -52,6 +52,11 @@ content-type: application/json
 // *** Genres ***
 
 ###
+GET http://localhost:3000/api/genres HTTP/1.1
+content-type: application/json
+
+
+###
 POST http://localhost:3000/api/genres HTTP/1.1
 content-type: application/json
 x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDJlMzBjNzAxYjg3ZTM4NzA2NTQ1NDYiLCJpYXQiOjE1NjMzODkzMzN9.ads27P4p5PVoSfJ256Fg76WmdOP8Vq_brDsh5bXR8Mw
