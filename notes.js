@@ -57,3 +57,10 @@ let course = {
 // custom-enviroment-variables.json - is set into docker file (env vars)
 
 // To handle async errors in routes use require('express-async-errors') or middleware as async.js
+
+
+// Tests: unit (fn, class or several classes without external dependencies), integration (fn, class or several classes with external dependencies) and end to end (selenium, with interacting with uset interface)s
+
+// How many tests for function - to equal to number of exequtions (return) 
+// Make unit tests for fns with minimum numbers of external dependencies (mock) because it will make unit tests unsupportive and hard to read / write
+// for others make integrational tests (with a lot of mocking it's better to write integrational tests)
