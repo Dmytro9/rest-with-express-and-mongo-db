@@ -1,4 +1,5 @@
 {
     "name": "My Express App",
-    "jwtPrivateKey": "mySecureKey"
+    "jwtPrivateKey": "mySecureKey",
+    "db": "mongodb://localhost:27017/playground"
 }
