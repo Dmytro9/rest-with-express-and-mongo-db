@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
             title: movie.title,
             dailyRentalRate: movie.dailyRentalRate,
         },
-        rentalFree: req.body.rentalFree
+        rentalFee: req.body.rentalFee
     })
 
     // Without Fawn 

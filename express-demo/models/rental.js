@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const Joi = require("joi")
+const moment = require('moment');
+
 
 // embedded collection with some embedded props
 const rentalSchema = new mongoose.Schema({
     customer: {
-        type: new mongoose.Schema({ // not already defined customerSchema (but only necessarily props)
+        type: new mongoose.Schema({ // not already defined whole customerSchema (but only some props)
             name: {
                 type: String,
                 required: true,
@@ -50,12 +52,25 @@ const rentalSchema = new mongoose.Schema({
     dateReturned: {
         type: Date,
     },
-    rentalFree: {
+    rentalFee: {
         type: Number,
         min: 0
     },
-})
+});
 
+rentalSchema.statics.lookup = function (customerId, movieId) {
+    return this.findOne({
+        'customer._id': customerId,
+        'movie._id': movieId
+    });
+};
+
+rentalSchema.methods.return = function () {
+    this.dateReturned = new Date();
+
+    const rentalDays = moment().diff(this.dateOut, 'days');
+    this.rentalFee = rentalDays * this.movie.dailyRentalRate;
+}
 
 const Rental = mongoose.model("Rental", rentalSchema);
 
@@ -64,7 +79,7 @@ function validateRental(rental) {
     const schema = {
         customerId: Joi.objectId().required(),
         movieId: Joi.objectId().required(),
-        rentalFree: Joi.number()
+        rentalFee: Joi.number()
     };
 
     return Joi.validate(rental, schema);

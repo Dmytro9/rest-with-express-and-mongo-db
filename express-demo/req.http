@@ -160,7 +160,7 @@ content-type: application/json
 {
     "customerId": "5d22219b003c0819e8967713",
     "movieId": "5d2227f5c55a2d2486b70c2e",
-    "rentalFree": 10
+    "rentalFee": 10
     
 }
 
