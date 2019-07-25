@@ -12,6 +12,7 @@ require('./startup/routes')(app)
 require('./startup/db')()
 require('./startup/config')()
 require('./startup/validation')()
+require('./startup/prod')(app)
 
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
